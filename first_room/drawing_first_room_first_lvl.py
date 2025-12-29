@@ -28,10 +28,10 @@ PLAYER_JUMP_SPEED = 17
 GRAVITY = 1
 PLAYER_MAX_HP = 100
 
-# Константы для камеры - УМЕНЬШЕНЫ В 2 РАЗА
+# Константы для камеры
 CAMERA_LERP = 0.12
-DEAD_ZONE_W = int(SCREEN_WIDTH * 0.35 / 3)  # Уменьшено в 2 раза
-DEAD_ZONE_H = int(SCREEN_HEIGHT * 0.45 / 3)  # Уменьшено в 2 раза
+DEAD_ZONE_W = int(SCREEN_WIDTH * 0.35 / 3)
+DEAD_ZONE_H = int(SCREEN_HEIGHT * 0.45 / 3)
 
 # Константы для рывка
 DASH_SPEED = 30
@@ -64,7 +64,7 @@ class DustParticle(arcade.SpriteCircle):
         self.change_x = random.uniform(-1.5, 1.5)
         self.change_y = random.uniform(0, 2)
 
-        # Начальные параметры согласно ТЗ
+        # Начальные параметры
         self.scale = 1.0
         self.alpha = 200
         self.lifetime = random.uniform(0.5, 1.2)
@@ -79,7 +79,7 @@ class DustParticle(arcade.SpriteCircle):
         self.change_x *= 0.95
         self.change_y *= 0.95
 
-        # Изменение масштаба по ТЗ: по X 1.02, по Y 1.005
+        # Изменение масштаба
         self.width *= 1.02
         self.height *= 1.005
 
@@ -225,17 +225,6 @@ class Geyser(arcade.Sprite):
             self.height)
         )
 
-        # Для отладки: отрисовываем хитбокс
-        # if self.active:
-        #     arcade.draw_rectangle_outline(
-        #         self.center_x,
-        #         (self.hitbox_bottom + self.hitbox_top) / 2,
-        #         self.width,
-        #         self.height,
-        #         arcade.color.RED,
-        #         2
-        #     )
-
     def check_collision(self, player):
         """Проверяет столкновение с игроком и наносит урон"""
         if not self.active or self.damage_dealt_in_current_cycle:
@@ -258,10 +247,10 @@ class Geyser(arcade.Sprite):
 
         # Проверка пересечения прямоугольников
         collision = not (
-                player_hitbox[1] < geyer_hitbox[0] or  # player.right < geyser.left
-                player_hitbox[0] > geyer_hitbox[1] or  # player.left > geyser.right
-                player_hitbox[2] > geyer_hitbox[3] or  # player.bottom > geyser.top
-                player_hitbox[3] < geyer_hitbox[2]  # player.top < geyser.bottom
+                player_hitbox[1] < geyer_hitbox[0]
+                player_hitbox[0] > geyer_hitbox[1]
+                player_hitbox[2] > geyer_hitbox[3]
+                player_hitbox[3] < geyer_hitbox[2]
         )
 
         if collision:
@@ -458,12 +447,12 @@ class GameWindow(arcade.Window):
         self.create_platforms()
 
         # Создаем гейзеры
-        geyser_x = 280 * 2  # 560
+        geyser_x = 280 * 2
         geyser_y = 1365
         geyser1 = Geyser(geyser_x, geyser_y)
         self.geysers.append(geyser1)
 
-        geyser_x = 870 * 2  # 1740
+        geyser_x = 870 * 2
         geyser_y = 1315
         geyser2 = Geyser(geyser_x, geyser_y)
         self.geysers.append(geyser2)
